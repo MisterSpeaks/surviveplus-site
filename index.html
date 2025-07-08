@@ -1,0 +1,162 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Survive+ - DayZ Pro</title>
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body { height: 100%; }
+    body { display: flex; flex-direction: column; background: black; overflow-x: hidden; }
+    #tsparticles { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+    main { flex: 1; }
+    .glow-box {
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 20px #22c55e, 0 0 40px #22c55e; }
+      50% { box-shadow: 0 0 30px #22c55e, 0 0 60px #22c55e; }
+    }
+  </style>
+</head>
+<body class="text-gray-200">
+
+<div id="tsparticles"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("tsparticles", {
+    background: { color: "#000" },
+    fpsLimit: 60,
+    particles: {
+      number: { value: 80, density: { enable: true, area: 800 } },
+      color: { value: "#22c55e" },
+      links: { enable: true, color: "#22c55e", distance: 150, opacity: 0.4 },
+      move: { enable: true, speed: 2, direction: "none", outModes: "bounce" },
+      size: { value: 3 },
+      opacity: { value: 0.6 }
+    },
+    interactivity: {
+      events: {
+        onHover: { enable: true, mode: "repulse" },
+        resize: true
+      },
+      modes: {
+        repulse: { distance: 100, duration: 0.4 }
+      }
+    },
+    detectRetina: true
+  });
+
+  function updateStripeLink() {
+    const select = document.querySelector('select');
+    const button = document.querySelector('#stripeButton');
+    let baseLink = "https://buy.stripe.com/4gM4gscY1c2taLl8p13Je00";
+    if (select.value.includes("7 Days")) baseLink = "https://buy.stripe.com/bJe8wIbTX2rT1aLax93Je01";
+    if (select.value.includes("1 Month")) baseLink = "https://buy.stripe.com/7sYbIU6zD5E53iT34H3Je02";
+    if (select.value.includes("3 Months")) baseLink = "https://buy.stripe.com/4gM8wI6zD5E5aLlgVx3Je03";
+    button.href = baseLink;
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const select = document.querySelector('select');
+    select.addEventListener('change', updateStripeLink);
+    updateStripeLink();
+  });
+</script>
+
+<nav class="flex justify-between items-center p-4 bg-gray-900 shadow relative">
+  <div class="flex items-center space-x-2">
+    <div class="text-green-400 text-2xl font-bold">S+</div>
+    <div class="text-lg font-semibold">Survive+</div>
+  </div>
+  <div>
+    <a href="#products" class="mx-3 hover:text-green-400">Products</a>
+    <a href="#about" class="mx-3 hover:text-green-400">About Us</a>
+  </div>
+</nav>
+
+<main>
+<section class="max-w-6xl mx-auto flex flex-col md:flex-row items-center mt-10 p-4 space-y-8 md:space-y-0 md:space-x-12 relative z-10">
+  <div class="w-full md:w-1/2">
+    <img src="https://i.ibb.co/35bbpv32/Chat-GPT-Image-Jul-6-2025-05-04-37-PM.png" alt="DayZ Pro" class="rounded border-2 border-green-500 glow-box hover:rotate-1 hover:scale-105 transition duration-500">
+  </div>
+
+  <div class="w-full md:w-1/2">
+    <h2 class="text-4xl font-extrabold mb-6">DayZ Pro</h2>
+    <p class="mb-8 text-gray-400">Stay alive and dominate the apocalypse with Survive+. Optimize your connection, stabilize frame rates, and monitor performance so you can survive infected hordes without disconnects or stutters.</p>
+
+    <div class="bg-gray-800 p-6 rounded-lg mb-8 border border-green-500 shadow-inner shadow-green-500/30">
+      <h3 class="text-2xl font-bold mb-4 text-green-400">Key Features:</h3>
+      <ul class="space-y-2 text-lg">
+        <li>• Adaptive ping optimization</li>
+        <li>• Real-time FPS monitoring</li>
+        <li>• In-game performance overlay</li>
+        <li>• Server stability enhancements</li>
+        <li>• Dedicated DayZ profiles</li>
+      </ul>
+    </div>
+
+    <div class="bg-gray-800 p-6 rounded-lg mb-8 border border-green-500 shadow-inner shadow-green-500/30">
+      <label class="block mb-2">Select Duration & Price:</label>
+      <select class="w-full p-3 rounded bg-gray-700 text-gray-200 mb-4">
+        <option>DayZ Pro (1 Day) — $7.00 USD (30% OFF)</option>
+        <option>DayZ Pro (7 Days) — $25.00 USD (30% OFF)</option>
+        <option>DayZ Pro (1 Month) — $60.00 USD (30% OFF)</option>
+        <option>DayZ Pro (3 Months) — $130.00 USD (30% OFF)</option>
+      </select>
+
+      <label class="block mb-2">Your Email Address:</label>
+      <input type="email" class="w-full p-3 rounded bg-gray-700 text-gray-200 mb-4" placeholder="you@example.com">
+<div id="emailWarning" class="mt-2 text-red-500 text-sm hidden transition-opacity duration-300">
+  ⚠ Please enter a valid email address.
+</div>
+
+    </div>
+
+    <div class="flex">
+      <a id="stripeButton" href="#" target="_blank" class="flex items-center justify-center bg-blue-600 hover:bg-blue-700 px-8 py-4 rounded text-white font-bold transition transform hover:scale-105 border-2 border-transparent hover:border-green-500 hover:shadow-[0_0_20px_#22c55e]">Buy with Stripe</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="bg-gray-900 w-full p-12 mt-16 text-center relative z-10">
+  <p>&copy; 2025 Survive+. All Rights Reserved.</p>
+  <p class="mt-2">Join us on <a href="https://discord.gg/pUUeHH8TkA" target="_blank" class="text-green-400 underline">Discord</a> for support & updates.</p>
+</footer>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const stripeButton = document.querySelector('#stripeButton');
+  const emailInput = document.querySelector('input[type="email"]');
+  const warning = document.getElementById('emailWarning');
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  emailInput.addEventListener('input', () => {
+    if (validateEmail(emailInput.value.trim())) {
+      warning.classList.add('hidden');
+      warning.classList.remove('opacity-100');
+    }
+  });
+
+  stripeButton.addEventListener('click', (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    if (!validateEmail(email)) {
+      warning.classList.remove('hidden');
+      warning.classList.add('opacity-100');
+      return;
+    }
+    window.location.href = stripeButton.href;
+  });
+});
+</script>
+
+</body>
+</html>
